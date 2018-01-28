@@ -3,8 +3,6 @@ package rc.loveq.eye;
 import android.app.Application;
 import android.content.Context;
 
-import com.squareup.leakcanary.LeakCanary;
-
 /**
  * Author：Rc
  * 0n 2018/1/27 21:24
@@ -16,10 +14,10 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        LeakCanary.install(this);
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            return;
+//        }
+//        LeakCanary.install(this);
         sApplicationContext = this;
     }
 
