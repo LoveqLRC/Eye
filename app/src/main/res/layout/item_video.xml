@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<rc.loveq.eye.widget.ForegroundLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:foreground="?android:selectableItemBackground"
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="8dp">
+    android:paddingTop="8dp"
+    android:stateListAnimator="@animator/raise">
 
     <rc.loveq.eye.widget.FourThreeImageView
         android:id="@+id/iv_video_cover"
@@ -55,4 +57,4 @@
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</rc.loveq.eye.widget.ForegroundLinearLayout>

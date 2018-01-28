@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 import me.drakeet.multitype.ItemViewBinder;
 import rc.loveq.eye.GlideApp;
+import rc.loveq.eye.IntentManager;
 import rc.loveq.eye.R;
 import rc.loveq.eye.data.model.ItemList;
+import rc.loveq.eye.ui.VideoPlayerActivity;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -43,6 +45,13 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
                 .into(holder.mIvAvatar);
         holder.mTvVideoTitle.setText(item.data.title);
         holder.mTvVideoDescription.setText(item.data.author.name + " / #" + item.data.category);
+
+        holder.mIvVideoCover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentManager.startVideoPlayerActivity(view.getContext(), VideoPlayerActivity.class);
+            }
+        });
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
