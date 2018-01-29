@@ -1,4 +1,4 @@
-package rc.loveq.eye;
+package rc.loveq.eye.utils.glide;
 
 import android.app.ActivityManager;
 import android.content.Context;

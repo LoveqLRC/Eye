@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity {
     private void setupMainRv() {
         mItems = new Items();
         mAdapter = new MultiTypeAdapter(mItems);
-        Register.registerMainItem(mAdapter);
+        Register.registerMainItem(mAdapter, this);
 
         mMainRv.setLayoutManager(new LinearLayoutManager(this));
         mMainRv.setAdapter(mAdapter);

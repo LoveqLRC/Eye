@@ -1,7 +1,13 @@
 package rc.loveq.eye;
 
-import android.content.Context;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.util.Pair;
+import android.view.View;
+
+import rc.loveq.eye.data.model.ItemList;
+import rc.loveq.eye.ui.VideoPlayerActivity;
 
 /**
  * Author：Rc
@@ -9,8 +15,12 @@ import android.content.Intent;
  */
 
 public class IntentManager {
-    public static void startVideoPlayerActivity(Context context, Class clazz) {
-        Intent intent = new Intent(context, clazz);
-        context.startActivity(intent);
+    public static void startVideoPlayerActivity(View view, Activity activity, ItemList item) {
+        Intent intent = new Intent(activity, VideoPlayerActivity.class);
+        intent.putExtra(VideoPlayerActivity.EXTRA_VIDEO, item);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity,
+                Pair.create(view, activity.getString(R.string.transition_video)),
+                Pair.create(view, activity.getString(R.string.transition_video_background)));
+        activity.startActivity(intent, options.toBundle());
     }
 }

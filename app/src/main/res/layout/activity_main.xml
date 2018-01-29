@@ -13,9 +13,11 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:elevation="1dp"
+            style="@style/Widget.Eye.HomeToolbar"
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"/>
+            android:layout_height="?android:attr/actionBarSize"
+            android:outlineProvider="none"
+            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/main_rv"

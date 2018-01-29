@@ -2,4 +2,10 @@
 <resources>
     <dimen name="avatar_size">40dp</dimen>
     <dimen name="touch_raise">6dp</dimen>
+    <dimen name="drag_dismiss_distance">112dp</dimen>
+    <dimen name="video_collapsed_app_bar_height">168dp</dimen>
+    <dimen name="z_app_bar">4dp</dimen>
+    <dimen name="z_card">2dp</dimen>
+    <dimen name="z_fab_over_touchable_app_bar">9dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
 </resources>

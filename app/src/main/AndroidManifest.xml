@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".ui.VideoPlayerActivity">
         </activity>
+        <activity android:name=".ui.AuthorActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -9,17 +9,20 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="8dp"
-    android:stateListAnimator="@animator/raise">
+    >
 
     <rc.loveq.eye.widget.FourThreeImageView
         android:id="@+id/iv_video_cover"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:stateListAnimator="@animator/raise"
+        android:foreground="@drawable/mid_grey_ripple"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
