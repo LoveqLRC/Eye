@@ -3,4 +3,7 @@
 
     <string name="transition_video_background" translatable="false">video_background</string>
     <string name="transition_video" translatable="false">video</string>
+    <string name="transition_author_background" translatable="false">transition_author_background</string>
+    <string name="transition_author_avatar" translatable="false">transition_player_avatar</string>
+    <string name="follow">Follow</string>
 </resources>

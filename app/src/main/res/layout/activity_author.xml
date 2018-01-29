@@ -1,9 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<rc.loveq.eye.widget.ElasticDragDismissFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:dragDismissDistance="@dimen/drag_dismiss_distance"
+    app:dragDismissScale="0.95"
     tools:context="rc.loveq.eye.ui.AuthorActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <View
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_light"
+        android:elevation="@dimen/z_card"
+        android:transitionName="@string/transition_author_background"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:elevation="@dimen/z_card"
+        android:transitionGroup="false">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="@dimen/large_avatar_size"
+            android:layout_height="@dimen/large_avatar_size"
+            android:layout_marginTop="@dimen/spacing_micro"
+            android:elevation="@dimen/z_card"
+            android:padding="@dimen/avatar_padding"
+            android:src="@drawable/shape_avatar_placeholder"
+            android:transitionName="@string/transition_author_avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/player_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/padding_normal"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingTop="@dimen/avatar_margin"
+            android:textAppearance="@style/TextAppearance.Author.Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/avatar"
+            tools:text="开眼动画精选"/>
+
+        <Button
+            android:id="@+id/follow"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/spacing_normal"
+            android:drawableStart="@drawable/asl_follow"
+            android:paddingBottom="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/padding_normal"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingTop="@dimen/spacing_normal"
+            android:text="@string/follow"
+            android:textAppearance="@style/TextAppearance.DarkButton"
+            android:theme="@style/LightRippleOverlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/player_name"/>
+
+        <TextView
+            android:id="@+id/player_bio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/padding_normal"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingTop="@dimen/padding_normal"
+            android:textAppearance="@style/TextAppearance.AuthorDescription"
+            android:textColorHighlight="@color/author_link_highlight"
+            android:textColorLink="@color/author_links"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/follow"
+            tools:text="Designer &amp; developer at Google."/>
+
+        <TextView
+            android:id="@+id/shot_count"
+            style="@style/Widget.Eye.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableTop="@drawable/avd_shots"
+            android:paddingBottom="@dimen/padding_large"
+            android:paddingTop="@dimen/padding_large"
+            app:layout_constraintEnd_toStartOf="@+id/followers_count"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/player_bio"
+            tools:text="1337 shots"/>
+
+        <TextView
+            android:id="@id/followers_count"
+            style="@style/Widget.Eye.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/avd_followers"
+            android:paddingBottom="@dimen/padding_large"
+            android:paddingTop="@dimen/padding_large"
+            app:layout_constraintEnd_toStartOf="@+id/likes_count"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/shot_count"
+            app:layout_constraintTop_toBottomOf="@id/player_bio"
+            tools:text="1337 followers"/>
+
+        <TextView
+            android:id="@id/likes_count"
+            style="@style/Widget.Eye.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableTop="@drawable/avd_likes"
+            android:paddingBottom="@dimen/padding_large"
+            android:paddingTop="@dimen/padding_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/followers_count"
+            app:layout_constraintTop_toBottomOf="@id/player_bio"
+            tools:text="1,000,000 likes"/>
+    </android.support.constraint.ConstraintLayout>
+</rc.loveq.eye.widget.ElasticDragDismissFrameLayout>
