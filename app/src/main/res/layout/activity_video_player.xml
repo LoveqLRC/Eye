@@ -50,7 +50,7 @@
     </FrameLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/dribbble_comments"
+        android:id="@+id/rv_video_comments"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

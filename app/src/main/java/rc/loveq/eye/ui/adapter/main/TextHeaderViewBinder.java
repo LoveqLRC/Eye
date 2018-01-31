@@ -1,4 +1,4 @@
-package rc.loveq.eye.ui.adapter;
+package rc.loveq.eye.ui.adapter.main;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

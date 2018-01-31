@@ -1,4 +1,4 @@
-package rc.loveq.eye.ui.adapter;
+package rc.loveq.eye.ui.adapter.main;
 
 import android.app.Activity;
 import android.content.res.TypedArray;

@@ -18,4 +18,8 @@
     <dimen name="spacing_large">32dp</dimen>
     <dimen name="spacing_huge">64dp</dimen>
     <dimen name="main_item_divider_size">16dp</dimen>
+    <dimen name="avatar_bounds">48dp</dimen>
+    <dimen name="avatar_ripple_radius">20dp</dimen>
+    <dimen name="comment_actions_height">40dp</dimen>
+    <dimen name="comment_like_margin_adjustment">-8dp</dimen>
 </resources>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rc.loveq.eye.widget.ForegroundRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:selectableItemBackground"
+    android:minHeight="?android:listPreferredItemHeight"
+    android:paddingBottom="@dimen/padding_normal"
+    android:paddingEnd="@dimen/padding_normal"
+    android:paddingTop="@dimen/padding_normal">
+
+    <ImageView
+        android:id="@+id/iv_comment_avatar"
+        android:layout_width="@dimen/avatar_bounds"
+        android:layout_height="@dimen/avatar_bounds"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="@dimen/avatar_margin"
+        android:layout_marginStart="@dimen/avatar_margin"
+        android:foreground="@drawable/avatar_ripple"
+        android:padding="@dimen/avatar_padding"
+        android:src="@drawable/shape_avatar_placeholder"
+        android:stateListAnimator="@animator/raise"
+        />
+
+    <TextView
+        android:id="@+id/tv_comment_time_ago"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:textAppearance="@style/TextAppearance.CommentTimestamp"
+        tools:text="3 hours ago"
+        />
+
+    <TextView
+        android:id="@+id/tv_comment_author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_toEndOf="@id/iv_comment_avatar"
+        android:layout_toStartOf="@id/tv_comment_time_ago"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textAppearance="@style/TextAppearance.CommentAuthor.Video"
+        tools:text="Rc在努力"/>
+
+    <TextView
+        android:id="@+id/tv_comment_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/tv_comment_author"
+        android:layout_toEndOf="@id/iv_comment_avatar"
+        android:textAppearance="@style/TextAppearance.Comment"
+        tools:text="Blah blah blah blah blah blah blah blah blah blah blah blah blah"/>
+
+    <TextView
+        android:id="@+id/tv_comment_likes_count"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/comment_actions_height"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/tv_comment_text"
+        android:layout_marginEnd="@dimen/comment_like_margin_adjustment"
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:gravity="end|center_vertical"
+        android:padding="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_normal"
+        android:text="@string/comment_likes_count"
+        android:textColor="@color/dark_icon"
+        />
+
+    <rc.loveq.eye.widget.CheckableImageButton
+        android:id="@+id/cib_comment_like"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/comment_actions_height"
+        android:layout_below="@id/tv_comment_text"
+        android:layout_marginEnd="@dimen/comment_like_margin_adjustment"
+        android:layout_toStartOf="@id/tv_comment_likes_count"
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:padding="@dimen/spacing_normal"
+        android:src="@drawable/asl_comment_heart"
+        />
+
+
+    <ImageButton
+        android:id="@+id/comment_reply"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/comment_actions_height"
+        android:layout_below="@id/tv_comment_text"
+        android:layout_toStartOf="@id/cib_comment_like"
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:padding="@dimen/spacing_normal"
+        android:src="@drawable/ic_reply"
+       />
+</rc.loveq.eye.widget.ForegroundRelativeLayout>

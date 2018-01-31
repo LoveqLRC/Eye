@@ -24,6 +24,8 @@
     </array>
 
     <color name="text_primary_dark">#de000000</color> <!-- 87% -->
+    <color name="dark_icon">#99000000</color> <!-- 60% black-->
     <color name="text_secondary_dark">#8a000000</color> <!-- 54% -->
     <color name="text_tertiary_dark">#61000000</color> <!-- 38% -->
+    <color name="hint_disabled_dark">#43000000</color> <!-- 26% black -->
 </resources>

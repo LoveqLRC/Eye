@@ -113,5 +113,20 @@
         <item name="android:background">?android:selectableItemBackgroundBorderless</item>
     </style>
 
+    <style name="TextAppearance.CommentTimestamp" parent="@android:style/TextAppearance.Material.Caption">
+        <item name="android:textColor">@color/hint_disabled_dark</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFeatureSettings">onum, smcp</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <style name="TextAppearance.CommentAuthor.Video">
+        <item name="android:textColor">@color/text_secondary_dark</item>
+    </style>
+
+    <style name="TextAppearance.Comment" parent="@android:style/TextAppearance.Material.Body1">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/text_secondary_dark</item>
+    </style>
 
 </resources>
