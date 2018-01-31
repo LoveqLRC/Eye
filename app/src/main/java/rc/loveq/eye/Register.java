@@ -4,7 +4,9 @@ import android.app.Activity;
 
 import me.drakeet.multitype.MultiTypeAdapter;
 import rc.loveq.eye.data.model.ItemList;
+import rc.loveq.eye.data.model.LoadMore;
 import rc.loveq.eye.data.model.TextHeader;
+import rc.loveq.eye.ui.adapter.LoadMoreViewBinder;
 import rc.loveq.eye.ui.adapter.TextHeaderViewBinder;
 import rc.loveq.eye.ui.adapter.VideoViewBinder;
 
@@ -17,5 +19,6 @@ public class Register {
     public static void registerMainItem(MultiTypeAdapter adapter, Activity activity) {
         adapter.register(TextHeader.class, new TextHeaderViewBinder());
         adapter.register(ItemList.class, new VideoViewBinder(activity));
+        adapter.register(LoadMore.class, new LoadMoreViewBinder());
     }
 }

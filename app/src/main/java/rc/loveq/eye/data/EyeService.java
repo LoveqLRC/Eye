@@ -15,7 +15,7 @@ public interface EyeService {
 
     //main
     @GET("v2/feed?num=2")
-    Flowable<Daily> getDaily(@Query("date") long date);
+    Flowable<Daily> getDaily(@Query("date") Long date);
 
     @GET("v2/feed?num=2")
     Flowable<Daily> getDaily();

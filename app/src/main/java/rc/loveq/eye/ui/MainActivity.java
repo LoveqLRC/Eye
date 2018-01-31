@@ -8,8 +8,6 @@ import android.text.TextUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
 import rc.loveq.eye.R;
@@ -18,9 +16,12 @@ import rc.loveq.eye.data.EyeService;
 import rc.loveq.eye.data.RetrofitClient;
 import rc.loveq.eye.data.model.Daily;
 import rc.loveq.eye.data.model.ItemList;
+import rc.loveq.eye.data.model.LoadMore;
 import rc.loveq.eye.data.model.TextHeader;
 import rc.loveq.eye.ui.base.BaseActivity;
 import rc.loveq.eye.utils.RxSchedulers;
+import rc.loveq.eye.utils.recyclerview.InfiniteScrollListener;
+import rc.loveq.eye.utils.recyclerview.MainItemDividerDecoration;
 
 public class MainActivity extends BaseActivity {
 
@@ -28,6 +29,7 @@ public class MainActivity extends BaseActivity {
     RecyclerView mMainRv;
     public Items mItems;
     public MultiTypeAdapter mAdapter;
+    private String dateTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,38 +49,40 @@ public class MainActivity extends BaseActivity {
         mAdapter = new MultiTypeAdapter(mItems);
         Register.registerMainItem(mAdapter, this);
 
-        mMainRv.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mMainRv.setLayoutManager(layoutManager);
         mMainRv.setAdapter(mAdapter);
+        mMainRv.addItemDecoration(new MainItemDividerDecoration(getResources().getDimensionPixelSize(R.dimen.main_item_divider_size)));
+        mMainRv.addOnScrollListener(new InfiniteScrollListener(layoutManager) {
+            @Override
+            protected void onLoadMore(int page) {
+                loadData(false, Long.valueOf(dateTime));
+            }
+        });
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        loadData();
+        loadData(true, null);
     }
 
-    private void loadData() {
+    private void loadData(boolean clear, Long dateTime) {
         EyeService service = RetrofitClient.getEyeService();
-        service.getDaily()
+        service.getDaily(dateTime)
                 .compose(RxSchedulers.flowable_io_main())
                 .compose(bindToLifecycle())
-                .doOnNext(new Consumer<Daily>() {
-                    @Override
-                    public void accept(Daily daily) throws Exception {
+                .doOnNext(daily -> {
+                    if (clear) mItems.clear();
+                    if (mItems.size() > 0) {
+                        Object item = mItems.get(mItems.size() - 1);
+                        if (item instanceof LoadMore) {
+                            mItems.remove(item);
+                        }
                     }
                 })
-                .doAfterTerminate(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mAdapter.notifyDataSetChanged();
-                    }
-                })
-                .subscribe(new Consumer<Daily>() {
-                    @Override
-                    public void accept(Daily daily) throws Exception {
-                        bindData(daily);
-                    }
-                });
+                .doAfterTerminate(() -> mAdapter.notifyDataSetChanged())
+                .subscribe(daily -> bindData(daily));
     }
 
     private void bindData(Daily daily) {
@@ -93,8 +97,11 @@ public class MainActivity extends BaseActivity {
                 } else {
                     throw new IllegalArgumentException("itemList.type not match");
                 }
-
             }
         }
+        mItems.add(new LoadMore());
+        String nextPageUrl = daily.nextPageUrl;
+        dateTime = nextPageUrl.substring(nextPageUrl.indexOf("=") + 1,
+                nextPageUrl.indexOf("&"));
     }
 }

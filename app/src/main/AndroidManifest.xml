@@ -11,15 +11,19 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity">
+        android:theme="@style/Eye">
+        <activity
+            android:name=".ui.MainActivity"
+            android:theme="@style/Eye.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.VideoPlayerActivity">
+        <activity
+            android:name=".ui.VideoPlayerActivity"
+            android:theme="@style/Eye.Translucent.Video">
         </activity>
         <activity android:name=".ui.AuthorActivity">
         </activity>

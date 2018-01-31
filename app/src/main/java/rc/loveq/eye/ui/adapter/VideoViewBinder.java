@@ -56,23 +56,34 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull ItemList item) {
-        GlideApp.with(holder.itemView.getContext())
+        GlideApp.with(mActivity)
                 .load(item.data.cover.detail)
                 .placeholder(shotLoadingPlaceholders[getPosition(holder) % shotLoadingPlaceholders.length])
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .centerCropAndRoundedCorners(16)
+//                .centerCropAndRoundedCorners(16)
+                .centerCrop()
                 .override(800, 600)
                 .transition(withCrossFade())
                 .into(holder.mIvVideoCover);
-
-        GlideApp.with(holder.itemView.getContext())
-                .load(item.data.author.icon)
+        String iconUrl = "";
+        String description = "";
+        if (item.data.author != null) {
+            iconUrl = item.data.author.icon;
+            description = item.data.author.name + " / #" + item.data.category;
+        } else {
+            iconUrl = item.data.provider.icon;
+            description = item.data.provider.name + " / #" + item.data.provider.alias;
+        }
+        GlideApp.with(mActivity)
+                .load(iconUrl)
                 .placeholder(R.drawable.shape_avatar_placeholder)
+                .error(R.drawable.shape_avatar_placeholder)
                 .circleCrop()
                 .transition(withCrossFade())
                 .into(holder.mIvAvatar);
+        holder.mTvVideoDescription.setText(description);
+
         holder.mTvVideoTitle.setText(item.data.title);
-        holder.mTvVideoDescription.setText(item.data.author.name + " / #" + item.data.category);
 
         holder.mIvVideoCover.setOnClickListener(new View.OnClickListener() {
             @Override

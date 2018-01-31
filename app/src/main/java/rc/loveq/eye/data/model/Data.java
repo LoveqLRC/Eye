@@ -27,6 +27,7 @@ public class Data implements Parcelable {
     public List<ItemList> itemList;
     public Author author;
     public String icon;
+    public Provider provider;
 
 
     protected Data(Parcel in) {

@@ -15,6 +15,9 @@
     <color name="author_link_highlight">#b3f06292</color>
     <color name="author">#fff06292</color>
     <color name="inline_action_icon">#ff757575</color>
+    <color name="video_super_dark">#ff33292d</color>
+    <color name="video">#fff06292</color>
+    <color name="immersive_bars">#99ffffff</color>
     <array name="loading_placeholders_dark">
         <item>#e6e6e6</item>
         <item>#dedede</item>

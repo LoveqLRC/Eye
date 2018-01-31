@@ -14,4 +14,8 @@
     <dimen name="spacing_normal">8dp</dimen>
     <dimen name="avatar_margin">12dp</dimen>
     <dimen name="padding_large">24dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="spacing_large">32dp</dimen>
+    <dimen name="spacing_huge">64dp</dimen>
+    <dimen name="main_item_divider_size">16dp</dimen>
 </resources>

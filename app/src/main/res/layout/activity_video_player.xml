@@ -48,4 +48,26 @@
             android:background="@drawable/mid_grey_ripple"
             android:src="@drawable/ic_arrow_back"/>
     </FrameLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/dribbble_comments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_normal"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbars="vertical"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+    <rc.loveq.eye.widget.FABToggle
+        android:id="@+id/fab_heart"
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/padding_normal"
+        android:background="@drawable/fab_video_play"
+        android:elevation="@dimen/z_fab_over_touchable_app_bar"
+        android:src="@drawable/ic_play_arrow_white_48px"
+        android:stateListAnimator="@animator/raise"/>
 </rc.loveq.eye.widget.ElasticDragDismissFrameLayout>
