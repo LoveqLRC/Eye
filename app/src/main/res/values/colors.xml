@@ -11,7 +11,6 @@
     <color name="text_primary_light">#ffffffff</color>
     <color name="light_icon">#ffffffff</color>
     <color name="ripple_light">#99ffffff</color>
-    <color name="text_tertiary_dark">#61000000</color>
     <color name="author_link_highlight">#b3f06292</color>
     <color name="author">#fff06292</color>
     <color name="inline_action_icon">#ff757575</color>
@@ -23,4 +22,8 @@
         <item>#dedede</item>
         <item>#dcdcdc</item>
     </array>
+
+    <color name="text_primary_dark">#de000000</color> <!-- 87% -->
+    <color name="text_secondary_dark">#8a000000</color> <!-- 54% -->
+    <color name="text_tertiary_dark">#61000000</color> <!-- 38% -->
 </resources>

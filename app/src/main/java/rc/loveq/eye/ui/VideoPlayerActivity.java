@@ -28,20 +28,19 @@ public class VideoPlayerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
         ButterKnife.bind(this);
-
         initData();
-
     }
 
     private void initData() {
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_VIDEO)) {
             mItem = intent.getParcelableExtra(EXTRA_VIDEO);
-            bindItem();
+            bindCover();
         }
     }
 
-    private void bindItem() {
+    private void bindCover() {
+        postponeEnterTransition();
         GlideApp.with(this)
                 .load(mItem.data.cover.detail)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
@@ -50,6 +49,10 @@ public class VideoPlayerActivity extends BaseActivity {
                 .override(800, 600)
                 .transition(withCrossFade())
                 .into(mPsVideoCover);
+        mPsVideoCover.getViewTreeObserver().addOnPreDrawListener(() -> {
+            startPostponedEnterTransition();
+            return true;
+        });
     }
 
     @Override

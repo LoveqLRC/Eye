@@ -38,7 +38,7 @@
                 android:id="@+id/iv_avatar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="4dp"
+                android:layout_marginLeft="8dp"
                 android:src="@drawable/shape_avatar_placeholder"
                 />
 
@@ -57,6 +57,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textSize="16sp"
+                    android:textColor="@color/text_primary_dark"
                     tools:text="日本扎心广告：职场地狱博物馆"/>
 
                 <TextView
@@ -67,6 +68,7 @@
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:textSize="12sp"
+                    android:textColor="@color/text_secondary_dark"
                     tools:text="开眼广告精选"/>
             </LinearLayout>
         </LinearLayout>

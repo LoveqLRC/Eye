@@ -9,6 +9,7 @@
     android:paddingTop="8dp"
     android:text="今日开眼精选"
     android:textSize="24sp"
+    android:textColor="@color/text_primary_dark"
     android:textStyle="bold">
 
 </TextView>

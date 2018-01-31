@@ -60,13 +60,14 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
                 .load(item.data.cover.detail)
                 .placeholder(shotLoadingPlaceholders[getPosition(holder) % shotLoadingPlaceholders.length])
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
-//                .centerCropAndRoundedCorners(16)
                 .centerCrop()
                 .override(800, 600)
                 .transition(withCrossFade())
                 .into(holder.mIvVideoCover);
-        String iconUrl = "";
-        String description = "";
+
+        String iconUrl;
+        String description;
+
         if (item.data.author != null) {
             iconUrl = item.data.author.icon;
             description = item.data.author.name + " / #" + item.data.category;
@@ -77,7 +78,7 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
         GlideApp.with(mActivity)
                 .load(iconUrl)
                 .placeholder(R.drawable.shape_avatar_placeholder)
-                .error(R.drawable.shape_avatar_placeholder)
+                .error(R.mipmap.ic_launcher)
                 .circleCrop()
                 .transition(withCrossFade())
                 .into(holder.mIvAvatar);
@@ -85,12 +86,7 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
 
         holder.mTvVideoTitle.setText(item.data.title);
 
-        holder.mIvVideoCover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                IntentManager.startVideoPlayerActivity(view, mActivity, item);
-            }
-        });
+        holder.mIvVideoCover.setOnClickListener(view -> IntentManager.startVideoPlayerActivity(view, mActivity, item));
         holder.mIvVideoCover.setBackground(
                 shotLoadingPlaceholders[getPosition(holder) % shotLoadingPlaceholders.length]);
 
