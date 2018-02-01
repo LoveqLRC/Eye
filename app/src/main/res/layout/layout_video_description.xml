@@ -61,7 +61,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/video_name"
+        android:id="@+id/player_name"
         android:layout_gravity="end"
         android:layout_marginTop="@dimen/padding_normal"
         android:clickable="false"

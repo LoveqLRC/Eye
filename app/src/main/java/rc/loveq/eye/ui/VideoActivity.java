@@ -6,8 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.transition.AutoTransition;
 import android.transition.Transition;
+import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -59,6 +62,13 @@ public class VideoActivity extends BaseActivity {
     private ItemList mItemList;
     public Items mItems;
     private MultiTypeAdapter mAdapter;
+    private View mShotSpacer;
+    private View mVideoTitle;
+    private View mVideoDescription;
+    private Button mVideoLikeCount;
+    private Button mVideoViewCount;
+    private Button mVideoShareCount;
+    private TextView mPlayerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +81,7 @@ public class VideoActivity extends BaseActivity {
 
     private void initView() {
         initCover();
+        initVideoDescription();
         initCommentList();
         chromeFader = new ElasticDragDismissFrameLayout.SystemChromeFader(this) {
             @Override
@@ -78,6 +89,51 @@ public class VideoActivity extends BaseActivity {
                 finishAfterTransition();
             }
         };
+    }
+
+    private void initCover() {
+        Intent intent = getIntent();
+        if (intent.hasExtra(EXTRA_VIDEO)) {
+            mItemList = intent.getParcelableExtra(EXTRA_VIDEO);
+            bindCover();
+        } else {
+            throw new IllegalArgumentException("you should pass ItemList");
+        }
+    }
+
+    private void bindCover() {
+        postponeEnterTransition();
+        GlideApp.with(this)
+                .load(mItemList.data.cover.detail)
+
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .priority(Priority.IMMEDIATE)
+                .centerCrop()
+                .override(800, 600)
+                .transition(withCrossFade())
+                .into(mPsVideoCover);
+        mPsVideoCover.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                mPsVideoCover.getViewTreeObserver().removeOnPreDrawListener(this);
+                calculateFabPosition();
+                startPostponedEnterTransition();
+                return true;
+            }
+        });
+    }
+
+    private void initVideoDescription() {
+        View videoDescription = getLayoutInflater().inflate(R.layout.layout_video_description,
+                mRvVideoComments, false);
+        mShotSpacer = videoDescription.findViewById(R.id.shot_spacer);
+        mVideoTitle = videoDescription.findViewById(R.id.tv_video_title);
+        mVideoDescription = videoDescription.findViewById(R.id.tv_video_description);
+        mVideoLikeCount = videoDescription.findViewById(R.id.shot_like_count);
+        mVideoViewCount = videoDescription.findViewById(R.id.shot_view_count);
+        mVideoShareCount = videoDescription.findViewById(R.id.shot_share_action);
+        mPlayerName = videoDescription.findViewById(R.id.player_name);
+
     }
 
 
@@ -117,37 +173,6 @@ public class VideoActivity extends BaseActivity {
         initCommentListData();
     }
 
-    private void initCover() {
-        Intent intent = getIntent();
-        if (intent.hasExtra(EXTRA_VIDEO)) {
-            mItemList = intent.getParcelableExtra(EXTRA_VIDEO);
-            bindCover();
-        } else {
-            throw new IllegalArgumentException("you should pass ItemList");
-        }
-    }
-
-    private void bindCover() {
-        postponeEnterTransition();
-        GlideApp.with(this)
-                .load(mItemList.data.cover.detail)
-
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .priority(Priority.IMMEDIATE)
-                .centerCrop()
-                .override(800, 600)
-                .transition(withCrossFade())
-                .into(mPsVideoCover);
-        mPsVideoCover.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-            @Override
-            public boolean onPreDraw() {
-                mPsVideoCover.getViewTreeObserver().removeOnPreDrawListener(this);
-                calculateFabPosition();
-                startPostponedEnterTransition();
-                return true;
-            }
-        });
-    }
 
     private void calculateFabPosition() {
 
