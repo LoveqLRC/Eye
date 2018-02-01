@@ -7,4 +7,6 @@
     <string name="transition_author_avatar" translatable="false">transition_player_avatar</string>
     <string name="follow">Follow</string>
     <string name="comment_likes_count">0</string>
+    <string name="share">share</string>
+
 </resources>

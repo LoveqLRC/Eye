@@ -1,8 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
+<GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#3C3C3C"
-    android:layout_height="200dp">
+    android:layout_height="wrap_content"
+    android:alignmentMode="alignBounds"
+    android:background="@android:color/transparent"
+    android:clipToPadding="false"
+    android:columnCount="3"
+    android:rowCount="7"
+    android:transitionGroup="false"
+    android:useDefaultMargins="false"
+    >
 
-</TextView>
+    <rc.loveq.eye.widget.FourThreeImageView
+        android:id="@+id/shot_spacer"
+        android:layout_columnSpan="3"
+        android:background="@drawable/mid_grey_bounded_ripple"/>
+
+    <include layout="@layout/layout_video_title"/>
+
+    <LinearLayout
+        android:id="@+id/video_action"
+        android:layout_width="match_parent"
+        android:layout_columnSpan="3"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/padding_normal"
+        android:paddingStart="@dimen/padding_normal"
+        android:paddingTop="@dimen/spacing_large">
+
+        <Button
+            android:id="@+id/shot_like_count"
+            style="@style/Widget.Eye.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/avd_likes"
+            tools:text="33 likes"/>
+
+        <Button
+            android:id="@+id/shot_view_count"
+            style="@style/Widget.Eye.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawableTop="@drawable/avd_views"
+            tools:text="33 views"/>
+
+        <Button
+            android:id="@+id/shot_share_action"
+            style="@style/Widget.Eye.InlineActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/avd_share"
+            android:text="@string/share"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/video_name"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/padding_normal"
+        android:clickable="false"
+        android:gravity="end"
+        android:paddingTop="@dimen/spacing_normal"
+        android:textAppearance="@style/TextAppearance.CommentAuthor"
+        tools:text="video name"
+        />
+
+    <rc.loveq.eye.widget.CircularImageView
+        android:id="@+id/player_avatar"
+        android:layout_width="@dimen/avatar_bounds"
+        android:layout_height="@dimen/avatar_bounds"
+        android:layout_marginStart="@dimen/avatar_margin"
+        android:layout_rowSpan="2"
+        android:foreground="@drawable/avatar_ripple"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/avatar_padding"
+        android:src="@drawable/shape_avatar_placeholder"
+        android:stateListAnimator="@animator/raise"
+        />
+
+    <Space
+        android:layout_width="@dimen/avatar_margin"
+        android:layout_rowSpan="2"/>
+
+    <TextView
+        android:id="@+id/shot_time_ago"
+        android:layout_gravity="end"
+        android:gravity="end"
+        android:textAppearance="@style/TextAppearance.CommentTimestamp"
+        tools:text="3 hours ago" />
+    <Space
+        android:layout_height="@dimen/avatar_margin"
+        android:layout_columnSpan="3" />
+</GridLayout>

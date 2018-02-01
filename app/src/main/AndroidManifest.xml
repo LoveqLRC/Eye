@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.VideoPlayerActivity"
+            android:name=".ui.VideoActivity"
             android:theme="@style/Eye.Translucent.Video">
         </activity>
         <activity android:name=".ui.AuthorActivity">

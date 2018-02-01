@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
+               android:duration="350"
+               android:transitionOrdering="together">
+    <changeBounds android:interpolator="@android:interpolator/fast_out_slow_in">
+        <targets>
+            <target android:targetId="@id/background" />
+        </targets>
+    </changeBounds>
+
+    <transition
+        class="rc.loveq.eye.ui.transitions.ShotSharedEnter"
+        android:interpolator="@android:interpolator/fast_out_slow_in">
+        <targets>
+            <target android:targetId="@id/ps_video_cover" />
+        </targets>
+    </transition>
+
+</transitionSet>

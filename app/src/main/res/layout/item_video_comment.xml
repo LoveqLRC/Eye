@@ -69,6 +69,7 @@
         android:paddingTop="@dimen/spacing_normal"
         android:text="@string/comment_likes_count"
         android:textColor="@color/dark_icon"
+        android:visibility="gone"
         />
 
     <rc.loveq.eye.widget.CheckableImageButton
@@ -81,11 +82,12 @@
         android:background="?android:selectableItemBackgroundBorderless"
         android:padding="@dimen/spacing_normal"
         android:src="@drawable/asl_comment_heart"
+        android:visibility="gone"
         />
 
 
     <ImageButton
-        android:id="@+id/comment_reply"
+        android:id="@+id/ib_comment_reply"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/comment_actions_height"
         android:layout_below="@id/tv_comment_text"
@@ -93,5 +95,6 @@
         android:background="?android:selectableItemBackgroundBorderless"
         android:padding="@dimen/spacing_normal"
         android:src="@drawable/ic_reply"
-       />
+        android:visibility="gone"
+        />
 </rc.loveq.eye.widget.ForegroundRelativeLayout>

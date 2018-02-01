@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/layout_video_description"
+    >
+
+    <TextView
+        android:id="@+id/tv_video_title"
+        android:layout_width="match_parent"
+        android:layout_columnSpan="3"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:background="@color/light_grey"
+        android:paddingBottom="@dimen/padding_normal"
+        android:paddingEnd="@dimen/padding_room_for_fab"
+        android:paddingStart="@dimen/padding_normal"
+        android:paddingTop="@dimen/padding_normal"
+        android:textAppearance="@style/TextAppearance.VideoTitle"
+        tools:text="开眼视频标题 "
+        />
+
+    <TextView
+        android:id="@+id/tv_video_description"
+        android:layout_columnSpan="3"
+        android:paddingEnd="@dimen/padding_normal"
+        android:paddingStart="@dimen/padding_normal"
+        android:textAppearance="@style/TextAppearance.VideoDescription"
+        tools:text="开眼视频描述 "
+        />
+</merge>

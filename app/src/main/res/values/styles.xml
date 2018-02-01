@@ -43,6 +43,10 @@
         <item name="android:navigationBarColor">@color/video_super_dark</item>
         <item name="android:colorControlActivated">?android:colorAccent</item>
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/video_shared_enter</item>
+        <item name="android:windowSharedElementReturnTransition">@transition/video_shared_return</item>
+        <item name="android:windowEnterTransition">@transition/video_enter</item>
+        <item name="android:windowReturnTransition">@transition/video_return</item>
     </style>
 
     <style name="Widget.Eye" parent="android:Widget"/>
@@ -129,4 +133,13 @@
         <item name="android:textColor">@color/text_secondary_dark</item>
     </style>
 
+
+    <style name="TextAppearance.VideoTitle" parent="@android:style/TextAppearance.Material.Headline">
+        <item name="android:textColor">@color/text_primary_dark</item>
+    </style>
+
+
+    <style name="TextAppearance.VideoDescription" parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:textColor">@color/text_tertiary_dark</item>
+    </style>
 </resources>
