@@ -1,11 +1,11 @@
 package rc.loveq.eye.ui.adapter.main;
 
-import android.app.Activity;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,10 +35,10 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 
 public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.ViewHolder>
         implements ListPreloader.PreloadModelProvider<ItemList> {
-    public Activity mActivity;
+    public AppCompatActivity mActivity;
     private final ColorDrawable[] shotLoadingPlaceholders;
 
-    public VideoViewBinder(Activity activity) {
+    public VideoViewBinder(AppCompatActivity activity) {
         mActivity = activity;
         TypedArray array = mActivity.obtainStyledAttributes(R.styleable.MainVideo);
         int resourceId = array.getResourceId(R.styleable.MainVideo_shotLoadingPlaceholderColors, 0);

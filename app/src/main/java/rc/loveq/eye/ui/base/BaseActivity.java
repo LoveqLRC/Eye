@@ -13,11 +13,13 @@ import rc.loveq.eye.R;
 
 public class BaseActivity extends RxAppCompatActivity {
 
+    protected Toolbar mToolbar;
+
     public void setupToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        if (toolbar == null) {
+        mToolbar = findViewById(R.id.toolbar);
+        if (mToolbar == null) {
             throw new NullPointerException();
         }
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mToolbar);
     }
 }

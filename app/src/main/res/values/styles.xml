@@ -43,8 +43,10 @@
         <item name="android:navigationBarColor">@color/video_super_dark</item>
         <item name="android:colorControlActivated">?android:colorAccent</item>
         <item name="android:windowAllowReturnTransitionOverlap">false</item>
-        <item name="android:windowSharedElementEnterTransition">@transition/video_shared_enter</item>
-        <item name="android:windowSharedElementReturnTransition">@transition/video_shared_return</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/video_shared_enter
+        </item>
+        <item name="android:windowSharedElementReturnTransition">@transition/video_shared_return
+        </item>
         <item name="android:windowEnterTransition">@transition/video_enter</item>
         <item name="android:windowReturnTransition">@transition/video_return</item>
     </style>
