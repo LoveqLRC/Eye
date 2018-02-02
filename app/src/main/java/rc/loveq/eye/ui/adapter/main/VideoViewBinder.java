@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.ListPreloader;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import java.util.Collections;
+import java.util.List;
 
 import me.drakeet.multitype.ItemViewBinder;
 import rc.loveq.eye.IntentManager;
@@ -27,7 +33,8 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
  * 0n 2018/1/28 11:08
  */
 
-public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.ViewHolder> {
+public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.ViewHolder>
+        implements ListPreloader.PreloadModelProvider<ItemList> {
     public Activity mActivity;
     private final ColorDrawable[] shotLoadingPlaceholders;
 
@@ -58,7 +65,8 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull ItemList item) {
         GlideApp.with(mActivity)
                 .load(item.data.cover.detail)
-                .placeholder(shotLoadingPlaceholders[getPosition(holder) % shotLoadingPlaceholders.length])
+//                .placeholder(shotLoadingPlaceholders[getPosition(holder) % shotLoadingPlaceholders.length])
+                .placeholder(shotLoadingPlaceholders[0])
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .centerCrop()
                 .override(800, 600)
@@ -90,6 +98,28 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
         holder.mIvVideoCover.setBackground(
                 shotLoadingPlaceholders[getPosition(holder) % shotLoadingPlaceholders.length]);
 
+    }
+
+    @NonNull
+    @Override
+    public List<ItemList> getPreloadItems(int position) {
+        List<?> items = getAdapter().getItems();
+        Object o = items.get(position);
+        if (o instanceof ItemList) {
+            return Collections.singletonList((ItemList) o);
+        }
+        return Collections.emptyList();
+    }
+
+    @Nullable
+    @Override
+    public RequestBuilder<?> getPreloadRequestBuilder(@NonNull ItemList item) {
+        return GlideApp.with(mActivity).load(item.data.cover.detail)
+                .placeholder(shotLoadingPlaceholders[0])
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .centerCrop()
+                .override(800, 600)
+                .transition(withCrossFade());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

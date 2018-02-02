@@ -6,6 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
+import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
+import com.bumptech.glide.util.ViewPreloadSizeProvider;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.drakeet.multitype.Items;
@@ -18,6 +21,7 @@ import rc.loveq.eye.data.model.Daily;
 import rc.loveq.eye.data.model.ItemList;
 import rc.loveq.eye.data.model.LoadMore;
 import rc.loveq.eye.data.model.TextHeader;
+import rc.loveq.eye.ui.adapter.main.VideoViewBinder;
 import rc.loveq.eye.ui.base.BaseActivity;
 import rc.loveq.eye.utils.RxSchedulers;
 import rc.loveq.eye.utils.recyclerview.InfiniteScrollListener;
@@ -50,6 +54,16 @@ public class MainActivity extends BaseActivity {
         Register.registerMainItem(mAdapter, this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+
+        ViewPreloadSizeProvider<ItemList> preloadSizeProvider = new ViewPreloadSizeProvider<>();
+        VideoViewBinder videoViewBinder = new VideoViewBinder(this);
+        mAdapter.register(ItemList.class, videoViewBinder);
+
+        RecyclerViewPreloader<ItemList> recyclerViewPreloader =
+                new RecyclerViewPreloader<>(this,
+                        videoViewBinder, preloadSizeProvider, 4);
+        mMainRv.addOnScrollListener(recyclerViewPreloader);
+
         mMainRv.setLayoutManager(layoutManager);
         mMainRv.setAdapter(mAdapter);
         mMainRv.addItemDecoration(new MainItemDividerDecoration(getResources().getDimensionPixelSize(R.dimen.main_item_divider_size)));
@@ -59,6 +73,7 @@ public class MainActivity extends BaseActivity {
                 loadData(false, Long.valueOf(dateTime));
             }
         });
+
     }
 
     @Override

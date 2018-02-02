@@ -6,13 +6,11 @@ import android.transition.AutoTransition;
 
 import me.drakeet.multitype.MultiTypeAdapter;
 import rc.loveq.eye.data.model.Data;
-import rc.loveq.eye.data.model.ItemList;
 import rc.loveq.eye.data.model.LoadMore;
 import rc.loveq.eye.data.model.ReplyList;
 import rc.loveq.eye.data.model.TextHeader;
 import rc.loveq.eye.ui.adapter.LoadMoreViewBinder;
 import rc.loveq.eye.ui.adapter.main.TextHeaderViewBinder;
-import rc.loveq.eye.ui.adapter.main.VideoViewBinder;
 import rc.loveq.eye.ui.adapter.video.VideoCommentsViewBinder;
 import rc.loveq.eye.ui.adapter.video.VideoDecriptionViewBinder;
 import rc.loveq.eye.utils.recyclerview.CommentAnimator;
@@ -25,7 +23,7 @@ import rc.loveq.eye.utils.recyclerview.CommentAnimator;
 public class Register {
     public static void registerMainItem(MultiTypeAdapter adapter, Activity activity) {
         adapter.register(TextHeader.class, new TextHeaderViewBinder());
-        adapter.register(ItemList.class, new VideoViewBinder(activity));
+//        adapter.register(ItemList.class, new VideoViewBinder(activity));
         adapter.register(LoadMore.class, new LoadMoreViewBinder());
     }
 
