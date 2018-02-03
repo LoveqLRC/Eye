@@ -28,5 +28,6 @@
     <color name="text_secondary_dark">#8a000000</color> <!-- 54% -->
     <color name="text_tertiary_dark">#61000000</color> <!-- 38% -->
     <color name="hint_disabled_dark">#43000000</color>
-    <color name="status_bar_back">#ff676767</color> <!-- 26% black -->
+    <color name="status_bar_back">#ff676767</color>
+    <color name="selected_comment_background">#ffffffff</color> <!-- 26% black -->
 </resources>

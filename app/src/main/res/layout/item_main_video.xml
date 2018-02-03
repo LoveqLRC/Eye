@@ -34,12 +34,15 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
+            <rc.loveq.eye.widget.CircularImageView
                 android:id="@+id/iv_avatar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="8dp"
+                android:layout_width="@dimen/avatar_bounds"
+                android:layout_height="@dimen/avatar_bounds"
+                android:layout_marginStart="@dimen/avatar_margin"
+                android:foreground="@drawable/avatar_ripple"
+                android:padding="@dimen/avatar_padding"
                 android:src="@drawable/shape_avatar_placeholder"
+                android:stateListAnimator="@animator/raise"
                 />
 
             <LinearLayout
@@ -56,8 +59,8 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textSize="16sp"
                     android:textColor="@color/text_primary_dark"
+                    android:textSize="16sp"
                     tools:text="日本扎心广告：职场地狱博物馆"/>
 
                 <TextView
@@ -67,8 +70,8 @@
                     android:layout_marginTop="4dp"
                     android:layout_weight="1"
                     android:maxLines="1"
-                    android:textSize="12sp"
                     android:textColor="@color/text_secondary_dark"
+                    android:textSize="12sp"
                     tools:text="开眼广告精选"/>
             </LinearLayout>
         </LinearLayout>

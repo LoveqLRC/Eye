@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.ListPreloader;
@@ -25,6 +26,7 @@ import rc.loveq.eye.IntentManager;
 import rc.loveq.eye.R;
 import rc.loveq.eye.data.model.ItemList;
 import rc.loveq.eye.utils.glide.GlideApp;
+import rc.loveq.eye.widget.CircularImageView;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -57,7 +59,7 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View view = inflater.inflate(R.layout.item_video, parent, false);
+        View view = inflater.inflate(R.layout.item_main_video, parent, false);
         return new ViewHolder(view);
     }
 
@@ -94,10 +96,17 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
 
         holder.mTvVideoTitle.setText(item.data.title);
 
-        holder.mIvVideoCover.setOnClickListener(view -> IntentManager.startVideoPlayerActivity(view, mActivity, item));
+        holder.mIvVideoCover.setOnClickListener(view -> IntentManager.startVideoActivity(view, mActivity, item));
         holder.mIvVideoCover.setBackground(
                 shotLoadingPlaceholders[getPosition(holder) % shotLoadingPlaceholders.length]);
 
+        holder.mIvAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentManager.startAuthorActivity(holder.mLlAuthorDetail,
+                        holder.mIvAvatar, mActivity);
+            }
+        });
     }
 
     @NonNull
@@ -124,8 +133,9 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final LinearLayout mLlAuthorDetail;
         public ImageView mIvVideoCover;
-        public ImageView mIvAvatar;
+        public CircularImageView mIvAvatar;
         public TextView mTvVideoTitle;
         public TextView mTvVideoDescription;
 
@@ -135,6 +145,7 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
             mTvVideoTitle = itemView.findViewById(R.id.tv_video_title);
             mTvVideoDescription = itemView.findViewById(R.id.tv_video_description);
             mIvAvatar = itemView.findViewById(R.id.iv_avatar);
+            mLlAuthorDetail = itemView.findViewById(R.id.ll_author_detail);
         }
     }
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import rc.loveq.eye.data.model.ItemList;
+import rc.loveq.eye.ui.AuthorActivity;
 import rc.loveq.eye.ui.VideoActivity;
 
 /**
@@ -21,7 +22,7 @@ import rc.loveq.eye.ui.VideoActivity;
  */
 
 public class IntentManager {
-    public static void startVideoPlayerActivity(View view, AppCompatActivity activity, ItemList item) {
+    public static void startVideoActivity(View view, AppCompatActivity activity, ItemList item) {
         Intent intent = new Intent(activity, VideoActivity.class);
         intent.putExtra(VideoActivity.EXTRA_VIDEO, item);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity,
@@ -31,7 +32,16 @@ public class IntentManager {
         activity.setExitSharedElementCallback(createSharedElementReenterCallback(activity));
     }
 
-    public static SharedElementCallback createSharedElementReenterCallback(@NonNull Context context) {
+    public static void startAuthorActivity(View parent, View avatar, AppCompatActivity activity) {
+        Intent intent = new Intent(activity, AuthorActivity.class);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity,
+                Pair.create(parent, activity.getString(R.string.transition_author_background)),
+                Pair.create(avatar, activity.getString(R.string.transition_author_avatar)));
+        activity.startActivity(intent, options.toBundle());
+
+    }
+
+    private static SharedElementCallback createSharedElementReenterCallback(@NonNull Context context) {
         final String shotTransitionName = context.getString(R.string.transition_video);
         final String shotBackgroundTransitionName =
                 context.getString(R.string.transition_video_background);

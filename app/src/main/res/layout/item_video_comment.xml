@@ -4,11 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:foreground="?android:selectableItemBackground"
     android:minHeight="?android:listPreferredItemHeight"
-    android:paddingBottom="@dimen/padding_normal"
+    android:paddingTop="@dimen/padding_normal"
     android:paddingEnd="@dimen/padding_normal"
-    android:paddingTop="@dimen/padding_normal">
+    android:paddingBottom="@dimen/padding_normal"
+    android:clipToPadding="false"
+    android:foreground="?android:selectableItemBackground"
+    android:background="@drawable/comment_background"
+    android:stateListAnimator="@animator/comment_selection"
+    android:descendantFocusability="blocksDescendants">
 
     <ImageView
         android:id="@+id/iv_comment_avatar"
