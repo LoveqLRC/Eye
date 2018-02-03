@@ -89,7 +89,7 @@
         android:layout_rowSpan="2"/>
 
     <TextView
-        android:id="@+id/shot_time_ago"
+        android:id="@+id/shot_time_duration"
         android:layout_gravity="end"
         android:gravity="end"
         android:textAppearance="@style/TextAppearance.CommentTimestamp"

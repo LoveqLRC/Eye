@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import me.drakeet.multitype.ItemViewBinder;
-import rc.loveq.eye.R;
 import rc.loveq.eye.data.model.Data;
 
 /**
@@ -15,12 +14,18 @@ import rc.loveq.eye.data.model.Data;
  * Description:
  */
 
-public class VideoDecriptionViewBinder extends ItemViewBinder<Data, VideoDecriptionViewBinder.ViewHolder> {
+public class VideoDescriptionViewBinder extends ItemViewBinder<Data, VideoDescriptionViewBinder.ViewHolder> {
+    private View mDescription;
+
+    public VideoDescriptionViewBinder(View description) {
+        mDescription = description;
+    }
+
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        View view = inflater.inflate(R.layout.layout_video_description, parent, false);
-        return new ViewHolder(view);
+//        View view = inflater.inflate(R.layout.layout_video_description, parent, false);
+        return new ViewHolder(mDescription);
     }
 
     @Override

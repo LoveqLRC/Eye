@@ -6,6 +6,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 
@@ -23,8 +24,9 @@ fun Drawable.toBitmap(): Bitmap {
 }
 
 fun drawableToBitmap(context: Context, @DrawableRes drawableId: Int) =
-        ContextCompat.getDrawable(context,drawableId)?.toBitmap()
+        ContextCompat.getDrawable(context, drawableId)?.toBitmap()
 
-
+val LayerDrawable.layers :List<Drawable>
+    get() = (0 until numberOfLayers).map { getDrawable(it) }
 
 
