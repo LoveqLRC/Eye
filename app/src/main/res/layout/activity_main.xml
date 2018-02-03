@@ -6,7 +6,6 @@
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
     android:orientation="vertical"
     tools:context="rc.loveq.eye.ui.MainActivity">
 
@@ -25,7 +24,6 @@
             android:id="@+id/main_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
             android:scrollbarStyle="outsideOverlay"/>
 
         <android.support.v7.widget.Toolbar
