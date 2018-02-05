@@ -46,6 +46,7 @@ public class Data implements Parcelable {
         itemList = in.createTypedArrayList(ItemList.CREATOR);
         author = in.readParcelable(Author.class.getClassLoader());
         icon = in.readString();
+        provider = in.readParcelable(Provider.class.getClassLoader());
     }
 
     @Override
@@ -65,6 +66,7 @@ public class Data implements Parcelable {
         dest.writeTypedList(itemList);
         dest.writeParcelable(author, flags);
         dest.writeString(icon);
+        dest.writeParcelable(provider,flags);
     }
 
     @Override
