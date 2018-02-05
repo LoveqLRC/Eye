@@ -80,7 +80,7 @@ public class VideoActivity extends BaseActivity {
     private ElasticDragDismissFrameLayout.SystemChromeFader chromeFader;
 
     private static final float SCRIM_ADJUSTMENT = 0.075f;
-    private ItemList mItemList;
+    private ItemList itemData;
     public Items mItems;
     private MultiTypeAdapter mAdapter;
     private View mShotSpacer;
@@ -120,7 +120,7 @@ public class VideoActivity extends BaseActivity {
     private void initCover() {
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_VIDEO)) {
-            mItemList = intent.getParcelableExtra(EXTRA_VIDEO);
+            itemData = intent.getParcelableExtra(EXTRA_VIDEO);
             bindCover();
         } else {
             throw new IllegalArgumentException("you should pass ItemList");
@@ -130,7 +130,7 @@ public class VideoActivity extends BaseActivity {
     private void bindCover() {
         postponeEnterTransition();
         GlideApp.with(this)
-                .load(mItemList.data.cover.detail)
+                .load(itemData.data.cover.detail)
                 .listener(mDrawableRequestListener)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .priority(Priority.IMMEDIATE)
@@ -162,23 +162,23 @@ public class VideoActivity extends BaseActivity {
         mPlayerAvatar = mDescription.findViewById(R.id.player_avatar);
         mShotTimeDuration = mDescription.findViewById(R.id.shot_time_duration);
 
-        mVideoTitle.setText(mItemList.data.title);
-        mVideoDescription.setText(mItemList.data.description);
+        mVideoTitle.setText(itemData.data.title);
+        mVideoDescription.setText(itemData.data.description);
 
         String iconUrl;
         String playerName;
-        if (mItemList.data.author != null) {
-            iconUrl = mItemList.data.author.icon;
-            playerName = mItemList.data.author.name;
+        if (itemData.data.author != null) {
+            iconUrl = itemData.data.author.icon;
+            playerName = itemData.data.author.name;
         } else {
-            iconUrl = mItemList.data.provider.icon;
-            playerName = mItemList.data.provider.name;
+            iconUrl = itemData.data.provider.icon;
+            playerName = itemData.data.provider.name;
         }
         mPlayerName.setText(playerName);
         TimeZone tz = TimeZone.getTimeZone("UTC");
         SimpleDateFormat df = new SimpleDateFormat("mm:ss");
         df.setTimeZone(tz);
-        String duration = df.format(new Date(mItemList.data.duration * 1000));
+        String duration = df.format(new Date(itemData.data.duration * 1000));
         mShotTimeDuration.setText(duration);
         GlideApp.with(this)
                 .load(iconUrl)
@@ -235,14 +235,14 @@ public class VideoActivity extends BaseActivity {
 
     private void initCommentListData() {
         EyeService service = RetrofitClient.getEyeService();
-        service.getReplies(mItemList.data.id)
+        service.getReplies(itemData.data.id)
                 .flatMap(replies -> Flowable.fromIterable(replies.replyList))
                 .compose(RxSchedulers.flowable_io_main())
                 .compose(bindToLifecycle())
                 .doAfterTerminate(new Action() {
                     @Override
                     public void run() throws Exception {
-                        mItems.add(0, mItemList.data);
+                        mItems.add(0, itemData.data);
                         mItems.add(new LoadMore());
                         mAdapter.notifyDataSetChanged();
                     }
