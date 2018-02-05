@@ -10,8 +10,8 @@ import io.reactivex.schedulers.Schedulers;
  * 0n 2018/1/27 22:17
  */
 
-public class RxSchedulers {
-    private RxSchedulers() {
+public class RxSchedulersUtils {
+    private RxSchedulersUtils() {
     }
 
     public static <T> ObservableTransformer<T, T> io_main() {

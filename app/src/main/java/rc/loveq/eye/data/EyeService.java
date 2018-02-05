@@ -18,10 +18,11 @@ public interface EyeService {
     @GET("v2/feed?num=2")
     Flowable<Daily> getDaily(@Query("date") Long date);
 
+    //such as http://baobab.kaiyanapp.com/api/v2/feed?num=2
     @GET("v2/feed?num=2")
     Flowable<Daily> getDaily();
 
-    //评论
+    //评论 such as  http://baobab.kaiyanapp.com/api/v1/replies/video?id=19301
     @GET("v1/replies/video")
     Flowable<Replies> getReplies(@Query("id") int id);
 

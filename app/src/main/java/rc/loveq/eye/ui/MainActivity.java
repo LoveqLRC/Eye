@@ -38,7 +38,7 @@ import rc.loveq.eye.ui.base.BaseActivity;
 import rc.loveq.eye.utils.AnimUtils;
 import rc.loveq.eye.utils.DrawableUtils;
 import rc.loveq.eye.utils.NetworkUtils;
-import rc.loveq.eye.utils.RxSchedulers;
+import rc.loveq.eye.utils.RxSchedulersUtils;
 import rc.loveq.eye.utils.ViewUtils;
 import rc.loveq.eye.utils.recyclerview.InfiniteScrollListener;
 import rc.loveq.eye.utils.recyclerview.MainItemDividerDecoration;
@@ -166,7 +166,7 @@ public class MainActivity extends BaseActivity {
     private void loadData(boolean clear, Long dateTime) {
         EyeService service = RetrofitClient.getEyeService();
         service.getDaily(dateTime)
-                .compose(RxSchedulers.flowable_io_main())
+                .compose(RxSchedulersUtils.flowable_io_main())
                 .compose(bindToLifecycle())
                 .doOnNext(daily -> {
                     if (clear) mItems.clear();

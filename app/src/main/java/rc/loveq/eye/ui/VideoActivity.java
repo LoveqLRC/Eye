@@ -50,7 +50,7 @@ import rc.loveq.eye.data.model.ReplyList;
 import rc.loveq.eye.ui.base.BaseActivity;
 import rc.loveq.eye.utils.AnimUtils;
 import rc.loveq.eye.utils.ColorUtils;
-import rc.loveq.eye.utils.RxSchedulers;
+import rc.loveq.eye.utils.RxSchedulersUtils;
 import rc.loveq.eye.utils.TransitionUtils;
 import rc.loveq.eye.utils.ViewUtils;
 import rc.loveq.eye.utils.glide.GlideApp;
@@ -128,7 +128,6 @@ public class VideoActivity extends BaseActivity {
     }
 
     private void bindCover() {
-        postponeEnterTransition();
         GlideApp.with(this)
                 .load(itemData.data.cover.detail)
                 .listener(mDrawableRequestListener)
@@ -138,6 +137,8 @@ public class VideoActivity extends BaseActivity {
                 .override(800, 600)
                 .transition(withCrossFade())
                 .into(mPsVideoCover);
+        postponeEnterTransition();
+
         mPsVideoCover.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
@@ -188,6 +189,7 @@ public class VideoActivity extends BaseActivity {
                 .override(largeAvatarSize, largeAvatarSize)
                 .transition(withCrossFade())
                 .into(mPlayerAvatar);
+
     }
 
 
@@ -237,7 +239,7 @@ public class VideoActivity extends BaseActivity {
         EyeService service = RetrofitClient.getEyeService();
         service.getReplies(itemData.data.id)
                 .flatMap(replies -> Flowable.fromIterable(replies.replyList))
-                .compose(RxSchedulers.flowable_io_main())
+                .compose(RxSchedulersUtils.flowable_io_main())
                 .compose(bindToLifecycle())
                 .doAfterTerminate(new Action() {
                     @Override
