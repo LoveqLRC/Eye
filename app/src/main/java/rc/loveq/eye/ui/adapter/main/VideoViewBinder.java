@@ -71,7 +71,7 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
                 .placeholder(shotLoadingPlaceholders[0])
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .centerCrop()
-                .override(800, 600)
+                .override(400, 300)
                 .transition(withCrossFade())
                 .into(holder.mIvVideoCover);
 
@@ -127,7 +127,7 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
                 .placeholder(shotLoadingPlaceholders[0])
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .centerCrop()
-                .override(800, 600)
+                .override(400, 300)
                 .transition(withCrossFade());
     }
 

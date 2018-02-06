@@ -134,7 +134,7 @@ public class VideoActivity extends BaseActivity {
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .priority(Priority.IMMEDIATE)
                 .centerCrop()
-                .override(800, 600)
+                .override(400, 300)
                 .transition(withCrossFade())
                 .into(mPsVideoCover);
         postponeEnterTransition();

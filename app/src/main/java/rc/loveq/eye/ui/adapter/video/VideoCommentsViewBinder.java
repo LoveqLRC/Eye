@@ -59,7 +59,7 @@ public class VideoCommentsViewBinder extends ItemViewBinder<ReplyList, VideoComm
                 .load(item.user.avatar)
                 .circleCrop()
                 .placeholder(R.drawable.shape_avatar_placeholder)
-                .override(800, 600)
+                .override(400, 300)
                 .transition(withCrossFade())
                 .into(holder.mIvAvatar);
         holder.mTvTimeAgo.setText(DateUtils.getRelativeTimeSpanString(item.createTime,

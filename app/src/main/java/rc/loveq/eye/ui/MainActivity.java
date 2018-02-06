@@ -139,7 +139,8 @@ public class MainActivity extends BaseActivity {
 
         mMainRv.setLayoutManager(layoutManager);
         mMainRv.setAdapter(mAdapter);
-        mMainRv.addItemDecoration(new MainItemDividerDecoration(getResources().getDimensionPixelSize(R.dimen.main_item_divider_size)));
+        mMainRv.addItemDecoration(new MainItemDividerDecoration(
+                getResources().getDimensionPixelSize(R.dimen.main_item_divider_size)));
         mMainRv.addOnScrollListener(new InfiniteScrollListener(layoutManager) {
             @Override
             protected void onLoadMore(int page) {
