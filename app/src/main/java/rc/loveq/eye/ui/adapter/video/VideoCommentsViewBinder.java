@@ -71,29 +71,6 @@ public class VideoCommentsViewBinder extends ItemViewBinder<ReplyList, VideoComm
 
         holder.mTvCommentLikeCount.setText(String.valueOf(item.likeCount));
 
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = getPosition(holder);
-                if (position == RecyclerView.NO_POSITION) return;
-                TransitionManager.beginDelayedTransition(mRecyclerView, expandCollapse);
-                mAnimator.setAnimateMoves(false);
-
-                if (RecyclerView.NO_POSITION != expandedCommentPosition) {
-                    getAdapter().notifyItemChanged(expandedCommentPosition, COLLAPSE);
-                }
-
-                if (expandedCommentPosition != position) {
-                    expandedCommentPosition = position;
-                    getAdapter().notifyItemChanged(position, EXPAND);
-                    holder.itemView.requestFocus();
-                } else {
-                    expandedCommentPosition = RecyclerView.NO_POSITION;
-                }
-
-            }
-        });
         setExpanded(holder, isExpanded);
     }
 
@@ -138,6 +115,28 @@ public class VideoCommentsViewBinder extends ItemViewBinder<ReplyList, VideoComm
             mCibLikeHeart = itemView.findViewById(R.id.cib_comment_like);
             mIbReply = itemView.findViewById(R.id.ib_comment_reply);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position == RecyclerView.NO_POSITION) return;
+                    TransitionManager.beginDelayedTransition(mRecyclerView, expandCollapse);
+                    mAnimator.setAnimateMoves(false);
+
+                    if (RecyclerView.NO_POSITION != expandedCommentPosition) {
+                        getAdapter().notifyItemChanged(expandedCommentPosition, COLLAPSE);
+                    }
+
+                    if (expandedCommentPosition != position) {
+                        expandedCommentPosition = position;
+                        getAdapter().notifyItemChanged(position, EXPAND);
+                        itemView.requestFocus();
+                    } else {
+                        expandedCommentPosition = RecyclerView.NO_POSITION;
+                    }
+
+                }
+            });
         }
     }
 }
