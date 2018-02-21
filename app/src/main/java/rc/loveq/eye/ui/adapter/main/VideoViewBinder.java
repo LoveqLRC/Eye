@@ -104,7 +104,7 @@ public class VideoViewBinder extends ItemViewBinder<ItemList, VideoViewBinder.Vi
             @Override
             public void onClick(View v) {
                 IntentManager.startAuthorActivity(holder.mLlAuthorDetail,
-                        holder.mIvAvatar, mActivity);
+                        holder.mIvAvatar, mActivity,item);
             }
         });
     }

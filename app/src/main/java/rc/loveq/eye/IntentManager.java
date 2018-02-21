@@ -33,8 +33,10 @@ public class IntentManager {
         activity.setExitSharedElementCallback(createSharedElementReenterCallback(activity));
     }
 
-    public static void startAuthorActivity(View parent, View avatar, AppCompatActivity activity) {
+    public static void startAuthorActivity(View parent, View avatar, AppCompatActivity activity
+            , ItemList item) {
         Intent intent = new Intent(activity, AuthorActivity.class);
+        intent.putExtra(AuthorActivity.EXTRA_DATA, item);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity,
                 Pair.create(parent, activity.getString(R.string.transition_author_background)),
                 Pair.create(avatar, activity.getString(R.string.transition_author_avatar)));
