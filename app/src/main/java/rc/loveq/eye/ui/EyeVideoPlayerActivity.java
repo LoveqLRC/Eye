@@ -1,6 +1,7 @@
 package rc.loveq.eye.ui;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,34 +16,47 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rc.loveq.eye.R;
+import rc.loveq.eye.data.model.ItemList;
 import rc.loveq.eye.data.model.SwitchVideoModel;
 import rc.loveq.eye.ui.base.BaseActivity;
 import rc.loveq.eye.widget.EyeVideoPlayer;
 
 public class EyeVideoPlayerActivity extends BaseActivity {
-
+    public static final String EXTRA_DATA = "EXTRA_DATA";
     @BindView(R.id.video_player)
     EyeVideoPlayer mVideoPlayer;
+    private ItemList itemData;
     public OrientationUtils mOrientationUtils;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eye_video_player);
         ButterKnife.bind(this);
+        initData();
         initView();
     }
+
+    private void initData() {
+        Intent intent = getIntent();
+        if (intent.hasExtra(EXTRA_DATA)) {
+            itemData = intent.getParcelableExtra(EXTRA_DATA);
+        } else {
+            throw new IllegalArgumentException("you should pass ItemList");
+        }
+    }
+
 
     private void initView() {
         initEyeVideoPlayer();
     }
 
     private void initEyeVideoPlayer() {
-        String source1 = "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=27916&editionType=normal&source=aliyun";
+        String source1 = itemData.data.playUrl;
         String name = "标清";
-        String source2 = "http://baobab.kaiyanapp.com/api/v1/playUrl?vid=27916&editionType=high&source=aliyun";
+        String source2 = itemData.data.playUrl;
         String name2 = "高清";
-
         SwitchVideoModel switchVideoModel = new SwitchVideoModel(name, source1);
 
         SwitchVideoModel switchVideoModel2 = new SwitchVideoModel(name2, source2);
@@ -50,9 +64,8 @@ public class EyeVideoPlayerActivity extends BaseActivity {
         List<SwitchVideoModel> list = new ArrayList<>();
         list.add(switchVideoModel);
         list.add(switchVideoModel2);
-        mVideoPlayer.setUp(list, true, "测试视频");
+        mVideoPlayer.setUp(list, true, itemData.data.title);
         mVideoPlayer.getTitleTextView().setVisibility(View.VISIBLE);
-
         //设置返回键
         mVideoPlayer.getBackButton().setVisibility(View.VISIBLE);
         //设置旋转

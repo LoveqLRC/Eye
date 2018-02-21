@@ -26,7 +26,12 @@ public interface EyeService {
     @GET("v1/replies/video")
     Flowable<Replies> getReplies(@Query("id") int id);
 
+
+    @GET("v1/replies/video")
+    Flowable<Replies> getReplies(@Query("num")int num,@Query("id") int id);
+
     @GET("v1/replies/video?num=10")
-    Flowable<Replies> getReplies(@Query("id") int id, @Query("lastId") int lastId);
+    Flowable<Replies> getReplies(@Query("id") int id, @Query("lastId") Long lastId);
+
 
 }

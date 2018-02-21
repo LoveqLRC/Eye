@@ -46,7 +46,7 @@ public class EyeVideoPlayer extends StandardGSYVideoPlayer {
     //数据源
     private int mSourcePosition = 0;
 
-    private String mTypeText = "标准";
+    private String mTypeText = "标清";
 
     /**
      * 1.5.0开始加入，如果需要不同布局区分功能，需要重载

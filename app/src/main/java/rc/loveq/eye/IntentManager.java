@@ -42,8 +42,9 @@ public class IntentManager {
 
     }
 
-    public static void startEyeVideoPlayerActivity(AppCompatActivity activity) {
+    public static void startEyeVideoPlayerActivity(AppCompatActivity activity, ItemList itemData) {
         Intent intent = new Intent(activity, EyeVideoPlayerActivity.class);
+        intent.putExtra(EyeVideoPlayerActivity.EXTRA_DATA, itemData);
         activity.startActivity(intent);
     }
 

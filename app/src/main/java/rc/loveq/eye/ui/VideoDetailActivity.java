@@ -27,6 +27,8 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
+import org.reactivestreams.Publisher;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -35,9 +37,8 @@ import butterknife.BindDimen;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Flowable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
 import rc.loveq.eye.IntentManager;
@@ -46,8 +47,7 @@ import rc.loveq.eye.Register;
 import rc.loveq.eye.data.EyeService;
 import rc.loveq.eye.data.RetrofitClient;
 import rc.loveq.eye.data.model.ItemList;
-import rc.loveq.eye.data.model.LoadMore;
-import rc.loveq.eye.data.model.ReplyList;
+import rc.loveq.eye.data.model.Replies;
 import rc.loveq.eye.ui.base.BaseActivity;
 import rc.loveq.eye.utils.AnimUtils;
 import rc.loveq.eye.utils.ColorUtils;
@@ -97,6 +97,7 @@ public class VideoDetailActivity extends BaseActivity {
     int fabOffset;
     @BindDimen(R.dimen.large_avatar_size)
     int largeAvatarSize;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,6 +217,7 @@ public class VideoDetailActivity extends BaseActivity {
         mAdapter = new MultiTypeAdapter(mItems);
         Register.registerVideoItem(mAdapter, expandCollapse, mRvVideoComments,
                 animator, mDescription);
+
         mRvVideoComments.addOnScrollListener(mScrollListener);
         mRvVideoComments.setAdapter(mAdapter);
         mRvVideoComments.setItemAnimator(animator);
@@ -239,26 +241,23 @@ public class VideoDetailActivity extends BaseActivity {
     private void initCommentListData() {
         EyeService service = RetrofitClient.getEyeService();
         service.getReplies(itemData.data.id)
-                .flatMap(replies -> Flowable.fromIterable(replies.replyList))
-                .compose(RxSchedulersUtils.flowable_io_main())
-                .compose(bindToLifecycle())
-                .doAfterTerminate(new Action() {
+                .flatMap(new Function<Replies, Publisher<Replies>>() {
                     @Override
-                    public void run() throws Exception {
+                    public Publisher<Replies> apply(Replies replies) throws Exception {
+                        return service.getReplies(replies.total, itemData.data.id);
+                    }
+                }).compose(RxSchedulersUtils.flowable_io_main())
+                .compose(bindToLifecycle())
+                .subscribe(new Consumer<Replies>() {
+                    @Override
+                    public void accept(Replies replies) throws Exception {
                         mItems.add(0, itemData.data);
-                        mItems.add(new LoadMore());
+                        mItems.addAll(replies.replyList);
                         mAdapter.notifyDataSetChanged();
                     }
-                })
-                .subscribe(new Consumer<ReplyList>() {
-                    @Override
-                    public void accept(ReplyList list) throws Exception {
-                        mItems.add(list);
-                    }
                 });
-
-
     }
+
 
     @Override
     protected void onResume() {
@@ -349,14 +348,8 @@ public class VideoDetailActivity extends BaseActivity {
                                 mPsVideoCover.setScrimColor(statusBarColor);
                                 ValueAnimator statusBarColorAnim = ValueAnimator.ofArgb(
                                         getWindow().getStatusBarColor(), statusBarColor);
-                                statusBarColorAnim.addUpdateListener(new ValueAnimator
-                                        .AnimatorUpdateListener() {
-                                    @Override
-                                    public void onAnimationUpdate(ValueAnimator animation) {
-                                        getWindow().setStatusBarColor(
-                                                (int) animation.getAnimatedValue());
-                                    }
-                                });
+                                statusBarColorAnim.addUpdateListener(animation -> getWindow().setStatusBarColor(
+                                        (int) animation.getAnimatedValue()));
                                 statusBarColorAnim.setDuration(1000L);
                                 statusBarColorAnim.setInterpolator(AnimUtils.
                                         getFastOutSlowInInterpolator(VideoDetailActivity.this));
@@ -403,7 +396,7 @@ public class VideoDetailActivity extends BaseActivity {
                 finishAfterTransition();
                 break;
             case R.id.fab_heart:
-                IntentManager.startEyeVideoPlayerActivity(this);
+                IntentManager.startEyeVideoPlayerActivity(this, itemData);
                 break;
         }
     }
