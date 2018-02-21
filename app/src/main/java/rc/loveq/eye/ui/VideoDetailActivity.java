@@ -40,6 +40,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import me.drakeet.multitype.Items;
 import me.drakeet.multitype.MultiTypeAdapter;
+import rc.loveq.eye.IntentManager;
 import rc.loveq.eye.R;
 import rc.loveq.eye.Register;
 import rc.loveq.eye.data.EyeService;
@@ -63,7 +64,7 @@ import rc.loveq.eye.widget.ParallaxScrimageView;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-public class VideoActivity extends BaseActivity {
+public class VideoDetailActivity extends BaseActivity {
     public static final String EXTRA_VIDEO = "EXTRA_VIDEO";
 
     @BindView(R.id.ps_video_cover)
@@ -312,7 +313,7 @@ public class VideoActivity extends BaseActivity {
                 return false;
             }
             int twentyFourDip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24,
-                    VideoActivity.this.getResources().getDisplayMetrics());
+                    VideoDetailActivity.this.getResources().getDisplayMetrics());
             Palette.from(bitmap)
                     .maximumColorCount(3)
                     .clearFilters()
@@ -328,7 +329,7 @@ public class VideoActivity extends BaseActivity {
                                 isDark = lightness == ColorUtils.IS_DARK;
                             }
                             if (!isDark) {
-                                mBack.setColorFilter(ContextCompat.getColor(VideoActivity.this,
+                                mBack.setColorFilter(ContextCompat.getColor(VideoDetailActivity.this,
                                         R.color.dark_icon));
                             }
 
@@ -358,7 +359,7 @@ public class VideoActivity extends BaseActivity {
                                 });
                                 statusBarColorAnim.setDuration(1000L);
                                 statusBarColorAnim.setInterpolator(AnimUtils.
-                                        getFastOutSlowInInterpolator(VideoActivity.this));
+                                        getFastOutSlowInInterpolator(VideoDetailActivity.this));
                                 statusBarColorAnim.start();
                             }
 
@@ -372,13 +373,13 @@ public class VideoActivity extends BaseActivity {
                         public void onGenerated(@NonNull Palette palette) {
                             mShotSpacer.setBackground(
                                     ViewUtils.createRipple(palette, 0.25f, 0.5f,
-                                            ContextCompat.getColor(VideoActivity.this, R.color.mid_grey),
+                                            ContextCompat.getColor(VideoDetailActivity.this, R.color.mid_grey),
                                             true
                                     )
                             );
                             mPsVideoCover.setForeground(
                                     ViewUtils.createRipple(palette, 0.3f, 0.6f,
-                                            ContextCompat.getColor(VideoActivity.this, R.color.mid_grey),
+                                            ContextCompat.getColor(VideoDetailActivity.this, R.color.mid_grey),
                                             true)
                             );
                         }
@@ -395,4 +396,15 @@ public class VideoActivity extends BaseActivity {
 
     };
 
+    @OnClick({R.id.back, R.id.fab_heart})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.back:
+                finishAfterTransition();
+                break;
+            case R.id.fab_heart:
+                IntentManager.startEyeVideoPlayerActivity(this);
+                break;
+        }
+    }
 }

@@ -14,7 +14,8 @@ import java.util.Map;
 
 import rc.loveq.eye.data.model.ItemList;
 import rc.loveq.eye.ui.AuthorActivity;
-import rc.loveq.eye.ui.VideoActivity;
+import rc.loveq.eye.ui.EyeVideoPlayerActivity;
+import rc.loveq.eye.ui.VideoDetailActivity;
 
 /**
  * Author：Rc
@@ -23,8 +24,8 @@ import rc.loveq.eye.ui.VideoActivity;
 
 public class IntentManager {
     public static void startVideoActivity(View view, AppCompatActivity activity, ItemList item) {
-        Intent intent = new Intent(activity, VideoActivity.class);
-        intent.putExtra(VideoActivity.EXTRA_VIDEO, item);
+        Intent intent = new Intent(activity, VideoDetailActivity.class);
+        intent.putExtra(VideoDetailActivity.EXTRA_VIDEO, item);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity,
                 Pair.create(view, activity.getString(R.string.transition_video)),
                 Pair.create(view, activity.getString(R.string.transition_video_background)));
@@ -39,6 +40,11 @@ public class IntentManager {
                 Pair.create(avatar, activity.getString(R.string.transition_author_avatar)));
         activity.startActivity(intent, options.toBundle());
 
+    }
+
+    public static void startEyeVideoPlayerActivity(AppCompatActivity activity) {
+        Intent intent = new Intent(activity, EyeVideoPlayerActivity.class);
+        activity.startActivity(intent);
     }
 
     private static SharedElementCallback createSharedElementReenterCallback(@NonNull Context context) {

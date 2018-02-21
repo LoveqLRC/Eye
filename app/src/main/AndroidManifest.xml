@@ -22,10 +22,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.VideoActivity"
+            android:name=".ui.VideoDetailActivity"
             android:theme="@style/Eye.Translucent.Video">
         </activity>
         <activity android:name=".ui.AuthorActivity">
+        </activity>
+        <activity
+            android:name=".ui.EyeVideoPlayerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+        >
         </activity>
     </application>
 

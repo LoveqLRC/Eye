@@ -9,7 +9,7 @@
     android:transitionGroup="false"
     app:dragDismissDistance="@dimen/drag_dismiss_distance"
     app:dragDismissScale="0.95"
-    tools:context="rc.loveq.eye.ui.VideoActivity">
+    tools:context="rc.loveq.eye.ui.VideoDetailActivity">
 
     <View
         android:id="@+id/background"
