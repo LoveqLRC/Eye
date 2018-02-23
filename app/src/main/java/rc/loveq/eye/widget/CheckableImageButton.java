@@ -22,8 +22,8 @@ public class CheckableImageButton extends ImageButton implements Checkable {
 
     @Override
     public void setChecked(boolean checked) {
-        if (this.isChecked != isChecked) {
-            this.isChecked = isChecked;
+        if (this.isChecked != checked) {
+            this.isChecked = checked;
             refreshDrawableState();
         }
     }

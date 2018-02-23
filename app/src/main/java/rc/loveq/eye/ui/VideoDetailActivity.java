@@ -29,6 +29,8 @@ import com.bumptech.glide.request.target.Target;
 
 import org.reactivestreams.Publisher;
 
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -51,6 +53,7 @@ import rc.loveq.eye.data.model.Replies;
 import rc.loveq.eye.ui.base.BaseActivity;
 import rc.loveq.eye.utils.AnimUtils;
 import rc.loveq.eye.utils.ColorUtils;
+import rc.loveq.eye.utils.NetworkUtils;
 import rc.loveq.eye.utils.RxSchedulersUtils;
 import rc.loveq.eye.utils.TransitionUtils;
 import rc.loveq.eye.utils.ViewUtils;
@@ -61,6 +64,7 @@ import rc.loveq.eye.widget.CircularImageView;
 import rc.loveq.eye.widget.ElasticDragDismissFrameLayout;
 import rc.loveq.eye.widget.FABToggle;
 import rc.loveq.eye.widget.ParallaxScrimageView;
+import retrofit2.HttpException;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -227,7 +231,7 @@ public class VideoDetailActivity extends BaseActivity {
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        initCommentListData();
+        loadCommentListData();
     }
 
 
@@ -238,7 +242,7 @@ public class VideoDetailActivity extends BaseActivity {
         mFabHeart.setMinOffset(mPsVideoCover.getMinimumHeight() - (mFabHeart.getHeight() / 2));
     }
 
-    private void initCommentListData() {
+    private void loadCommentListData() {
         EyeService service = RetrofitClient.getEyeService();
         service.getReplies(itemData.data.id)
                 .flatMap(new Function<Replies, Publisher<Replies>>() {
@@ -255,7 +259,7 @@ public class VideoDetailActivity extends BaseActivity {
                         mItems.addAll(replies.replyList);
                         mAdapter.notifyDataSetChanged();
                     }
-                });
+                }, this::handleError);
     }
 
 
@@ -399,5 +403,34 @@ public class VideoDetailActivity extends BaseActivity {
                 IntentManager.startEyeVideoPlayerActivity(this, itemData);
                 break;
         }
+    }
+
+    //TODO:应该有更加好的办法处理网络问题
+    private void handleError(Throwable throwable) {
+        if (throwable instanceof HttpException) {
+            switch (((HttpException) throwable).code()) {
+                case 403:
+
+                    break;
+                case 504:
+                    if (NetworkUtils.isNetworkConnected(this)) {
+
+                    } else {
+
+                    }
+                    break;
+                default:
+                    ((HttpException) throwable).message();
+                    break;
+            }
+        } else if (throwable instanceof UnknownHostException) {
+
+        } else if (throwable instanceof SocketTimeoutException) {
+
+        } else {
+
+        }
+
+
     }
 }
