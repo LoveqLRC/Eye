@@ -78,6 +78,7 @@
             android:paddingEnd="@dimen/padding_normal"
             android:paddingStart="@dimen/padding_normal"
             android:paddingTop="@dimen/padding_normal"
+            android:gravity="center"
             android:textAppearance="@style/TextAppearance.AuthorDescription"
             android:textColorHighlight="@color/author_link_highlight"
             android:textColorLink="@color/author_links"

@@ -27,6 +27,8 @@ public class AuthorActivity extends BaseActivity {
     ImageView mAvatar;
     @BindView(R.id.player_name)
     TextView mPlayerName;
+    @BindView(R.id.player_bio)
+    TextView mPlayerBio;
     private ItemList itemData;
     private ElasticDragDismissFrameLayout.SystemChromeFader chromeFader;
 
@@ -69,6 +71,7 @@ public class AuthorActivity extends BaseActivity {
             }
         });
         mPlayerName.setText(itemData.data.author.name);
+        mPlayerBio.setText(itemData.data.author.description);
     }
 
     @Override
